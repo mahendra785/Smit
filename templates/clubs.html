@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clubs - EventEase</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>All Clubs</h1>
+    <ul>
+        {% for club in clubs %}
+        <li>
+            <a href="{{ url_for('club_details', club_id=club._id) }}">{{ club.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="/">Go to Home</a>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ event.title }} - EventEase</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>{{ event.title }}</h1>
+    <p>{{ event.description }}</p>
+    <p>Date: {{ event.date }}</p>
+    <p>Location: {{ event.location }}</p>
+    <h3>Participants:</h3>
+    <ul>
+        {% for participant in event.participants %}
+        <li>{{ participant.name }} - {{ participant.email }}</li>
+        {% endfor %}
+    </ul>
+    <form id="rsvp-form">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Your Email" required>
+        <input type="text" id="mobile" placeholder="Your Mobile" required>
+        <button type="submit">RSVP</button>
+    </form>
+    <p id="message"></p>
+    <script>
+        document.getElementById('rsvp-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const rsvpData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                mobile: document.getElementById('mobile').value
+            };
+            const response = await fetch('{{ url_for("event_details", event_id=event._id) }}', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(rsvpData)
+            });
+            const result = await response.json();
+            document.getElementById('message').textContent = result.message;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ club.name }} - Club Details</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>{{ club.name }}</h1>
+    <p><strong>Created By:</strong> {{ club.created_by }}</p>
+    <h2>Club Events</h2>
+    <ul>
+        {% for event in events %}
+        <li>
+            <a href="{{ url_for('event_details', event_id=event._id) }}">{{ event.title }}</a> - {{ event.date }}
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="/clubs">Back to Clubs</a>
+</body>
+</html>

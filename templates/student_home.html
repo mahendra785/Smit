@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+</head>
+<body>
+    <h2>Welcome, Student!</h2>
+    <h3>Upcoming Events</h3>
+    <ul>
+        {% for event in events %}
+        <li><a href="/event/{{ event._id }}">{{ event.title }}</a> - {{ event.date }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
